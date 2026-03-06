@@ -1,0 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Barlow", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Instrument Serif", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+}
