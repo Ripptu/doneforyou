@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowUpRight, CheckCircle2, Sparkles, Zap, ShieldCheck, X } from 'lucide-react';
+import { ArrowUpRight, CheckCircle2, Sparkles, Zap, ShieldCheck, X, Star, Lock, CheckCircle, AlertCircle, HelpCircle } from 'lucide-react';
 import { motion, useMotionValue, useSpring, useTransform, useMotionTemplate, AnimatePresence } from 'motion/react';
 
 const containerVariants = {
@@ -21,6 +21,8 @@ const itemVariants = {
 export default function App() {
   // Exit Intent State
   const [showExitPopup, setShowExitPopup] = useState(false);
+  const [showFaq, setShowFaq] = useState(false);
+  const [hoveredStar, setHoveredStar] = useState<number | null>(null);
 
   useEffect(() => {
     const handleMouseLeave = (e: MouseEvent) => {
@@ -94,22 +96,42 @@ export default function App() {
             transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
           />
 
-          <motion.div 
-            initial={{ opacity: 0, y: -20, scale: 0.8 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
-            className="mb-2 sm:mb-4 px-3 sm:px-5 py-1.5 sm:py-2 rounded-full bg-[#222]/5 backdrop-blur-xl border border-[#222]/10 text-[#222] font-bold text-[10px] sm:text-xs lg:text-sm tracking-widest uppercase shadow-sm flex items-center gap-1.5 sm:gap-2 relative overflow-hidden group"
+          {/* Star Rating */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+            className="flex items-center gap-1.5 sm:gap-2 mb-3 sm:mb-5 bg-white/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/50 shadow-sm"
           >
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"
-            />
-            <motion.div
-              animate={{ scale: [1, 1.3, 1], rotate: [0, 15, -15, 0] }}
-              transition={{ repeat: Infinity, duration: 2.5 }}
+            <div 
+              className="flex"
+              onMouseLeave={() => setHoveredStar(null)}
             >
-              <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-orange-500" />
-            </motion.div>
-            <span>Sonderangebot - Spare 33%</span>
+              {[1, 2, 3, 4, 5].map((star) => {
+                const isActive = hoveredStar ? star <= hoveredStar : true;
+                return (
+                  <motion.div
+                    key={star}
+                    onMouseEnter={() => setHoveredStar(star)}
+                    animate={{
+                      scale: hoveredStar === star ? 1.2 : 1,
+                      color: isActive ? "#eab308" : "#d1d5db",
+                    }}
+                    transition={{ duration: 0.2, type: "spring", stiffness: 300 }}
+                    className="cursor-pointer px-[1px]"
+                  >
+                    <Star 
+                      className={`w-3 h-3 sm:w-4 sm:h-4 transition-all duration-300 ${
+                        isActive ? "fill-current" : "fill-transparent"
+                      }`} 
+                    />
+                  </motion.div>
+                );
+              })}
+            </div>
+            <span className="text-[10px] sm:text-xs font-medium text-[#222]/80">
+              <strong className="text-[#222]">5/5</strong> von 29+ zufriedenen Kunden
+            </span>
           </motion.div>
 
           <motion.h1 
@@ -203,6 +225,12 @@ export default function App() {
                 </div>
                 <p className="text-[10px] sm:text-xs lg:text-sm font-semibold text-gray-400 mb-3 sm:mb-6" style={{ transform: "translateZ(20px)" }}>pro Monat <span className="mx-1 sm:mx-2">•</span> monatlich kündbar</p>
                 
+                {/* Limitierte Kapazität */}
+                <div className="flex items-center gap-2 mb-4 sm:mb-6 p-2 sm:p-2.5 bg-red-50/80 border border-red-100 rounded-lg text-red-600 text-[10px] sm:text-xs font-medium shadow-sm" style={{ transform: "translateZ(25px)" }}>
+                  <AlertCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
+                  Achtung: Nur noch 2 von 5 Plätzen für diesen Monat verfügbar!
+                </div>
+
                 <div className="mt-auto" style={{ transform: "translateZ(30px)" }}>
                   <motion.a 
                     href="https://www.digistore24.com/product/673489"
@@ -223,9 +251,20 @@ export default function App() {
                     </span>
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-[150%] group-hover/btn:translate-x-[150%] transition-transform duration-700 ease-in-out" />
                   </motion.a>
-                  <div className="flex items-center justify-center gap-1.5 sm:gap-2 mt-2 sm:mt-4 text-[9px] sm:text-[11px] lg:text-xs text-gray-500 font-medium">
-                    <ShieldCheck className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-green-500" />
-                    Keine versteckten Kosten. Jederzeit kündbar.
+                  
+                  {/* Zahlungsarten */}
+                  <div className="flex items-center justify-center gap-1.5 sm:gap-2 mt-3 opacity-70 grayscale">
+                    <span className="text-[9px] sm:text-[10px] font-bold border border-gray-300 rounded px-1.5 py-0.5">PayPal</span>
+                    <span className="text-[9px] sm:text-[10px] font-bold border border-gray-300 rounded px-1.5 py-0.5">VISA</span>
+                    <span className="text-[9px] sm:text-[10px] font-bold border border-gray-300 rounded px-1.5 py-0.5">Mastercard</span>
+                    <span className="text-[9px] sm:text-[10px] font-bold border border-gray-300 rounded px-1.5 py-0.5 bg-[#FFB3C7] text-black border-none grayscale-0">Klarna.</span>
+                  </div>
+
+                  {/* Trust Badges */}
+                  <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mt-3 text-[9px] sm:text-[10px] text-gray-500 font-medium">
+                    <div className="flex items-center gap-1"><Lock className="w-3 h-3" /> SSL Secure</div>
+                    <div className="flex items-center gap-1"><ShieldCheck className="w-3 h-3" /> 100% Sicher</div>
+                    <div className="flex items-center gap-1"><CheckCircle className="w-3 h-3" /> Digistore24 Verified</div>
                   </div>
                 </div>
               </div>
@@ -272,6 +311,18 @@ export default function App() {
               </div>
             </motion.div>
           </div>
+
+          {/* FAQ Button */}
+          <motion.button
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1 }}
+            onClick={() => setShowFaq(true)}
+            className="mt-6 sm:mt-8 text-xs sm:text-sm font-medium text-[#222]/60 hover:text-[#222] flex items-center gap-1.5 transition-colors bg-white/20 backdrop-blur-md px-4 py-2 rounded-full border border-white/30 shadow-sm"
+          >
+            <HelpCircle className="w-4 h-4" />
+            Noch Fragen? Hier klicken.
+          </motion.button>
 
         </main>
       </div>
@@ -330,6 +381,94 @@ export default function App() {
                 >
                   Nein danke, ich zahle lieber den vollen Preis
                 </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* FAQ Modal */}
+      <AnimatePresence>
+        {showFaq && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+              onClick={() => setShowFaq(false)}
+            />
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              transition={{ type: "spring", stiffness: 300, damping: 25 }}
+              className="relative bg-white/90 backdrop-blur-3xl p-6 sm:p-8 rounded-[32px] border border-white/50 shadow-[0_30px_100px_rgba(0,0,0,0.3)] max-w-lg w-full text-left overflow-hidden"
+            >
+              <button 
+                onClick={() => setShowFaq(false)}
+                className="absolute top-6 right-6 text-gray-400 hover:text-gray-800 transition-colors"
+              >
+                <X size={24} />
+              </button>
+              
+              <h2 className="text-xl sm:text-2xl font-bold text-[#222] mb-6 flex items-center gap-2">
+                <HelpCircle className="text-orange-500 w-6 h-6" />
+                Häufige Fragen
+              </h2>
+              
+              <div className="space-y-4 sm:space-y-5 max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
+                {/* 1. Vertrauen & Expertise */}
+                <div className="bg-white/50 p-4 rounded-2xl border border-white/60">
+                  <h4 className="font-bold text-[#222] text-sm sm:text-base">Warum eine Flatrate statt eines Einmalpreises?</h4>
+                  <p className="text-gray-600 text-xs sm:text-sm mt-1.5 leading-relaxed">Eine erfolgreiche Website ist kein einmaliges Projekt. Sie benötigt kontinuierliche Pflege, Sicherheits-Updates und fortlaufende SEO-Anpassungen, um dauerhaft sichtbar zu bleiben und Kunden zu gewinnen. Mit unserer Flatrate hast du immer eine technisch und inhaltlich perfekte Seite, ohne unkalkulierbare Zusatzkosten.</p>
+                </div>
+                <div className="bg-white/50 p-4 rounded-2xl border border-white/60">
+                  <h4 className="font-bold text-[#222] text-sm sm:text-base">Haben Sie Erfahrung in meiner Branche?</h4>
+                  <p className="text-gray-600 text-xs sm:text-sm mt-1.5 leading-relaxed">Ja. Wir sind spezialisiert auf Coaches, Berater und Finanzdienstleister. Wir kennen deine spezifischen Herausforderungen – von der DSGVO-konformen Lead-Generierung bis hin zum Aufbau von Expertenstatus durch gezieltes Design und Copywriting.</p>
+                </div>
+                <div className="bg-white/50 p-4 rounded-2xl border border-white/60">
+                  <h4 className="font-bold text-[#222] text-sm sm:text-base">Wie schnell sehe ich Ergebnisse?</h4>
+                  <p className="text-gray-600 text-xs sm:text-sm mt-1.5 leading-relaxed">Das neue Premium-Design und die Conversion-Optimierung wirken sofort ab Live-Schaltung. Für organische Sichtbarkeit (SEO) bei Google solltest du ehrlich mit 4 bis 6 Monaten rechnen, bis sich spürbare und stabile Rankings aufbauen.</p>
+                </div>
+
+                {/* 2. Prozess & Zusammenarbeit */}
+                <div className="bg-white/50 p-4 rounded-2xl border border-white/60">
+                  <h4 className="font-bold text-[#222] text-sm sm:text-base">Wie viel Zeit muss ich investieren?</h4>
+                  <p className="text-gray-600 text-xs sm:text-sm mt-1.5 leading-relaxed">Fast keine. Deine Zeit ist dein wichtigstes Gut. Wir bieten einen echten "Done-for-You" Service. Nach einem kurzen Kickoff-Call übernehmen wir den kompletten Prozess von Design über Texte bis zur Technik.</p>
+                </div>
+                <div className="bg-white/50 p-4 rounded-2xl border border-white/60">
+                  <h4 className="font-bold text-[#222] text-sm sm:text-base">Was passiert, wenn ich eine Änderung brauche?</h4>
+                  <p className="text-gray-600 text-xs sm:text-sm mt-1.5 leading-relaxed">Schreib uns einfach eine kurze Nachricht über unseren direkten WhatsApp-Support. Wir setzen Textänderungen, neue Bilder oder neue Unterseiten umgehend für dich um – alles in der Flatrate inklusive.</p>
+                </div>
+                <div className="bg-white/50 p-4 rounded-2xl border border-white/60">
+                  <h4 className="font-bold text-[#222] text-sm sm:text-base">Wie funktioniert der Start?</h4>
+                  <p className="text-gray-600 text-xs sm:text-sm mt-1.5 leading-relaxed">Nach der sicheren Buchung über Digistore24 erhältst du sofort Zugang zu unserem kurzen Onboarding. Dort fragst du deinen Wunschtermin für den Kickoff-Call an und wir starten direkt mit der Umsetzung.</p>
+                </div>
+
+                {/* 3. Technik & Strategie */}
+                <div className="bg-white/50 p-4 rounded-2xl border border-white/60">
+                  <h4 className="font-bold text-[#222] text-sm sm:text-base">Ist meine Website mobiloptimiert?</h4>
+                  <p className="text-gray-600 text-xs sm:text-sm mt-1.5 leading-relaxed">Absolut. Da über 70% deiner potenziellen Klienten über das Smartphone suchen werden, entwickeln wir im "Mobile-First" Ansatz. Deine Seite wird auf jedem Gerät perfekt aussehen und blitzschnell laden.</p>
+                </div>
+                <div className="bg-white/50 p-4 rounded-2xl border border-white/60">
+                  <h4 className="font-bold text-[#222] text-sm sm:text-base">Übernehmen Sie auch das Hosting und die Sicherheit?</h4>
+                  <p className="text-gray-600 text-xs sm:text-sm mt-1.5 leading-relaxed">Ja. Wir kümmern uns um das blitzschnelle Premium-Hosting, SSL-Zertifikate, tägliche Backups und alle technischen Updates im Hintergrund. Du musst dich um nichts Technisches mehr kümmern.</p>
+                </div>
+                <div className="bg-white/50 p-4 rounded-2xl border border-white/60">
+                  <h4 className="font-bold text-[#222] text-sm sm:text-base">Helfen Sie mir bei der Lead-Generierung?</h4>
+                  <p className="text-gray-600 text-xs sm:text-sm mt-1.5 leading-relaxed">Das ist unser Hauptziel. Wir bauen keine digitalen Visitenkarten, sondern Vertriebsmaschinen. Durch strategisch platzierte Call-to-Actions, optimierte Formulare und verkaufspsychologisches Design verwandeln wir Besucher in echte Anfragen.</p>
+                </div>
+
+                {/* 4. Vertrag & Kündigung */}
+                <div className="bg-white/50 p-4 rounded-2xl border border-white/60">
+                  <h4 className="font-bold text-[#222] text-sm sm:text-base">Gibt es eine Mindestlaufzeit?</h4>
+                  <p className="text-gray-600 text-xs sm:text-sm mt-1.5 leading-relaxed">Nein. Wir binden unsere Kunden durch exzellente Leistung, nicht durch Knebelverträge. Das Paket ist jederzeit monatlich kündbar. Volle Flexibilität und null Risiko für dich.</p>
+                </div>
+                <div className="bg-white/50 p-4 rounded-2xl border border-white/60">
+                  <h4 className="font-bold text-[#222] text-sm sm:text-base">Was ist alles im Preis enthalten?</h4>
+                  <p className="text-gray-600 text-xs sm:text-sm mt-1.5 leading-relaxed">Alles, was du für einen Premium-Auftritt brauchst: Individuelles Webdesign, fortlaufende SEO-Optimierung, Premium-Hosting, technologische Wartung, persönlicher WhatsApp-Support und unbegrenzte inhaltliche Änderungen.</p>
+                </div>
               </div>
             </motion.div>
           </div>
