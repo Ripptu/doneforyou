@@ -72,9 +72,9 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-[100dvh] lg:h-[100dvh] w-full overflow-x-hidden overflow-y-auto lg:overflow-hidden font-sans text-[#222] bg-black">
+    <div className="relative w-full bg-black font-sans text-[#222]">
       {/* Background Video */}
-      <div className="fixed inset-0 w-full h-full z-0">
+      <div className="fixed top-0 left-0 right-0 bottom-0 w-full h-[100vh] z-0 pointer-events-none">
         <video
           autoPlay
           loop
@@ -87,7 +87,7 @@ export default function App() {
       </div>
 
       {/* Content Overlay */}
-      <div className="relative z-10 flex flex-col min-h-[100dvh] lg:h-[100dvh] px-4 sm:px-8 pt-[max(env(safe-area-inset-top),1.5rem)] pb-[max(env(safe-area-inset-bottom),1.5rem)] lg:pt-0 lg:pb-0 items-center justify-center">
+      <div className="relative z-10 flex flex-col min-h-[100dvh] lg:h-[100dvh] w-full overflow-x-hidden overflow-y-auto lg:overflow-hidden px-4 sm:px-8 pt-[max(env(safe-area-inset-top),1.5rem)] pb-[max(env(safe-area-inset-bottom),1.5rem)] lg:pt-0 lg:pb-0 items-center justify-center">
         
         <main className="flex flex-col items-center justify-center text-center w-full max-w-5xl mx-auto relative flex-1">
           
