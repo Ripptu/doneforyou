@@ -72,22 +72,24 @@ export default function App() {
   };
 
   return (
-    <div className="relative h-[100dvh] w-full overflow-hidden font-sans text-[#222]">
+    <div className="relative min-h-[100dvh] w-full overflow-x-hidden overflow-y-auto font-sans text-[#222] bg-black">
       {/* Background Video */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover z-0"
-      >
-        <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260228_065522_522e2295-ba22-457e-8fdb-fbcd68109c73.mp4" type="video/mp4" />
-      </video>
+      <div className="fixed inset-0 w-full h-full z-0">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover scale-105"
+        >
+          <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260228_065522_522e2295-ba22-457e-8fdb-fbcd68109c73.mp4" type="video/mp4" />
+        </video>
+      </div>
 
       {/* Content Overlay */}
-      <div className="relative z-10 flex flex-col h-[100dvh] px-4 sm:px-8 items-center justify-center">
+      <div className="relative z-10 flex flex-col min-h-[100dvh] px-4 sm:px-8 py-6 sm:py-12 items-center justify-center">
         
-        <main className="flex flex-col items-center justify-center text-center w-full max-w-5xl mx-auto relative">
+        <main className="flex flex-col items-center justify-center text-center w-full max-w-5xl mx-auto relative flex-1">
           
           {/* Animated Glow Behind Card */}
           <motion.div 
@@ -101,7 +103,7 @@ export default function App() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-            className="flex items-center gap-1.5 sm:gap-2 mb-3 sm:mb-5 bg-white/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/50 shadow-sm"
+            className="flex items-center gap-1.5 sm:gap-2 mb-2 sm:mb-5 bg-white/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/50 shadow-sm"
           >
             <div 
               className="flex"
@@ -140,10 +142,10 @@ export default function App() {
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             className="flex flex-col items-center"
           >
-            <span className="font-semibold text-[26px] sm:text-[36px] lg:text-[60px] leading-[1.1] tracking-[-1px] sm:tracking-[-2px] lg:tracking-[-3px] text-[#222]">
+            <span className="font-semibold text-[24px] sm:text-[36px] lg:text-[60px] leading-[1.1] tracking-[-1px] sm:tracking-[-2px] lg:tracking-[-3px] text-[#222]">
               Dein digitaler Auftritt.
             </span>
-            <span className="font-serif italic text-[30px] sm:text-[40px] lg:text-[64px] leading-[1] text-[#222] mt-0.5 sm:mt-1">
+            <span className="font-serif italic text-[28px] sm:text-[40px] lg:text-[64px] leading-[1] text-[#222] mt-0.5 sm:mt-1">
               Einfach & Sorgenfrei
             </span>
           </motion.h1>
@@ -152,7 +154,7 @@ export default function App() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            className="mt-2 sm:mt-4 text-[12px] sm:text-[15px] lg:text-[16px] font-medium text-[#222]/80 max-w-[90%] sm:max-w-2xl leading-tight sm:leading-normal"
+            className="mt-1.5 sm:mt-4 text-[11px] sm:text-[15px] lg:text-[16px] font-medium text-[#222]/80 max-w-[90%] sm:max-w-2xl leading-tight sm:leading-normal"
           >
             Wir kümmern uns um alles. Von der Konzeption und dem Design bis hin zu Hosting, Wartung und fortlaufenden Updates.
           </motion.p>
@@ -318,7 +320,7 @@ export default function App() {
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
             onClick={() => setShowFaq(true)}
-            className="mt-6 sm:mt-8 text-xs sm:text-sm font-medium text-[#222]/60 hover:text-[#222] flex items-center gap-1.5 transition-colors bg-white/20 backdrop-blur-md px-4 py-2 rounded-full border border-white/30 shadow-sm"
+            className="mt-4 sm:mt-8 text-xs sm:text-sm font-medium text-[#222]/60 hover:text-[#222] flex items-center gap-1.5 transition-colors bg-white/20 backdrop-blur-md px-4 py-2 rounded-full border border-white/30 shadow-sm"
           >
             <HelpCircle className="w-4 h-4" />
             Noch Fragen? Hier klicken.
