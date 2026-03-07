@@ -72,15 +72,15 @@ export default function App() {
   };
 
   return (
-    <div className="relative w-full bg-black font-sans text-[#222]">
+    <div className="relative w-full min-h-[100dvh] bg-transparent font-sans text-[#222]">
       {/* Background Video */}
       <video
         autoPlay
         loop
         muted
         playsInline
-        className="fixed top-0 left-0 -z-10 pointer-events-none"
-        style={{ width: '100vw', height: '100dvh', objectFit: 'cover' }}
+        className="absolute top-0 left-0 z-0 pointer-events-none"
+        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
       >
         <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260228_065522_522e2295-ba22-457e-8fdb-fbcd68109c73.mp4" type="video/mp4" />
       </video>
