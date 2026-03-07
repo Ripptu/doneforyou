@@ -74,17 +74,16 @@ export default function App() {
   return (
     <div className="relative w-full bg-black font-sans text-[#222]">
       {/* Background Video */}
-      <div className="fixed top-0 left-0 right-0 bottom-0 w-full h-[100vh] z-0 pointer-events-none">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover scale-105"
-        >
-          <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260228_065522_522e2295-ba22-457e-8fdb-fbcd68109c73.mp4" type="video/mp4" />
-        </video>
-      </div>
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="fixed top-0 left-0 -z-10 pointer-events-none"
+        style={{ width: '100vw', height: '100dvh', objectFit: 'cover' }}
+      >
+        <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260228_065522_522e2295-ba22-457e-8fdb-fbcd68109c73.mp4" type="video/mp4" />
+      </video>
 
       {/* Content Overlay */}
       <div className="relative z-10 flex flex-col min-h-[100dvh] lg:h-[100dvh] w-full overflow-x-hidden overflow-y-auto lg:overflow-hidden px-4 sm:px-8 pt-[max(env(safe-area-inset-top),1.5rem)] pb-[max(env(safe-area-inset-bottom),1.5rem)] lg:pt-0 lg:pb-0 items-center justify-center">
