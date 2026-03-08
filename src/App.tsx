@@ -211,10 +211,10 @@ export default function App() {
                     transition={{ type: "spring", stiffness: 200, damping: 15, delay: 1.2 }}
                     className="text-4xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-br from-gray-900 via-gray-700 to-black bg-clip-text text-transparent tracking-tighter drop-shadow-sm leading-none"
                   >
-                    999€
+                    2.999€
                   </motion.span>
                   <div className="flex flex-col pb-0.5 sm:pb-1.5 relative">
-                    <span className="text-sm sm:text-xl text-gray-400 font-bold leading-none">1.499€</span>
+                    <span className="text-sm sm:text-xl text-gray-400 font-bold leading-none">4.499€</span>
                     {/* Animated Strike-through */}
                     <motion.div
                       initial={{ width: 0 }}
@@ -359,7 +359,7 @@ export default function App() {
               
               <h2 className="text-3xl font-bold text-[#222] mb-4 tracking-tight">Warte! Bevor du gehst...</h2>
               <p className="text-gray-600 mb-8 font-medium">
-                Das Angebot für <span className="text-[#222] font-bold">999€ statt 1.499€</span> gilt nur für kurze Zeit. 
+                Das Angebot für <span className="text-[#222] font-bold">2.999€ statt 4.499€</span> gilt nur für kurze Zeit. 
                 Sichere dir jetzt deinen digitalen Premium-Auftritt, bevor der Preis wieder steigt!
               </p>
               
