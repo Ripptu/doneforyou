@@ -224,7 +224,7 @@ export default function App() {
                     />
                   </div>
                 </div>
-                <p className="text-[10px] sm:text-xs lg:text-sm font-semibold text-gray-400 mb-3 sm:mb-6" style={{ transform: "translateZ(20px)" }}>pro Monat <span className="mx-1 sm:mx-2">•</span> monatlich kündbar</p>
+                <p className="text-[10px] sm:text-xs lg:text-sm font-semibold text-gray-400 mb-3 sm:mb-6" style={{ transform: "translateZ(20px)" }}>pro Monat <span className="mx-1 sm:mx-2">•</span> Keine Mindestlaufzeit <span className="mx-1 sm:mx-2">•</span> Jederzeit kündbar</p>
                 
                 {/* Limitierte Kapazität */}
                 <div className="flex items-center gap-2 mb-4 sm:mb-6 p-2 sm:p-2.5 bg-red-50/80 border border-red-100 rounded-lg text-red-600 text-[10px] sm:text-xs font-medium shadow-sm" style={{ transform: "translateZ(25px)" }}>
@@ -285,12 +285,12 @@ export default function App() {
                   className="grid grid-cols-2 lg:flex lg:flex-col gap-x-2 gap-y-1 sm:gap-2.5"
                 >
                   {[
-                    "Maßgeschneidertes Webdesign",
-                    "Premium Hosting & Domain",
-                    "Laufende Wartung & Updates",
-                    "SEO & Performance Optimierung",
-                    "Unbegrenzte Anpassungen",
-                    "24/7 Prioritäts-Support"
+                    "Individuelles Premium-Design (Keine Baukasten-Templates)",
+                    "Sicheres Premium-Hosting & deine Wunschdomain",
+                    "Technik-Flatrate (Wartung, Updates & Backups inklusive)",
+                    "Fortlaufende SEO-Optimierung für mehr Google-Sichtbarkeit",
+                    "Unbegrenzte inhaltliche Anpassungen einfach auf Zuruf",
+                    "Persönlicher VIP-Support (Direkter Draht via WhatsApp)"
                   ].map((feature, idx) => (
                     <motion.div 
                       key={idx} 
